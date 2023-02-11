@@ -1,10 +1,2 @@
 .idea
 .vscode
-
-.client/.vscode
-.client/.idea
-.client/.github
-
-.server/.vscode
-.server/.idea
-.server/.github
