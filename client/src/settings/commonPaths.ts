@@ -1,4 +1,5 @@
 export const commonPaths = {
-  default: '/',
-  main: '/main'
+  INDEX: '/',
+  POSTS: '/posts',
+  CREATE_POST: '/create-post'
 }

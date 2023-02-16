@@ -3,12 +3,12 @@ import {commonPaths} from "@/settings/commonPaths";
 export const menuItems = [
   {
     label: 'Home',
-    path: commonPaths.default,
+    path: commonPaths.INDEX,
     icon: 'mdi-star',
   },
   {
-    label: 'Main',
-    path: commonPaths.main,
-    icon: 'mdi-domain',
+    label: 'Posts',
+    path: commonPaths.POSTS,
+    icon: 'mdi-note-multiple-outline',
   },
 ];

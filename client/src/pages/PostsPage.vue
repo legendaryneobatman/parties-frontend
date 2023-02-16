@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <v-toolbar title="Posts">
+      <v-btn icon>
+        <v-icon icon="mdi-plus" @click="navigateToForm"/>
+      </v-btn>
+    </v-toolbar>
 
     <post-card
         class="ma-1"
@@ -14,7 +19,9 @@
 
 <script lang="ts" setup>
 import PostCard from "@/components/posts/PostCard.vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
+import {router} from "@/router";
+import {commonPaths} from "@/settings/commonPaths";
 
 const posts = reactive([
   {
@@ -28,6 +35,10 @@ const posts = reactive([
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, incidunt!'
   },
 ])
+
+const navigateToForm = () => {
+  router.push(commonPaths.CREATE_POST)
+};
 </script>
 
 <style lang="scss" scoped>

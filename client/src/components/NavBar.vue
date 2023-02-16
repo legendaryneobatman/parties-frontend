@@ -10,7 +10,7 @@
           :value="item.label"
           :prepend-icon="item.icon"
           link
-          :href="item.path"
+          :to="item.path"
       />
     </v-list>
   </v-navigation-drawer>

@@ -1,25 +1,31 @@
+import CreatePostPage from "@/pages/CreatePostPage.vue";
+
 export {}
 import WelcomePage from "@/pages/WelcomePage.vue";
-import {createRouter, createWebHashHistory} from 'vue-router';
-import MainPage from "@/pages/MainPage.vue";
+import {createRouter, createWebHistory} from 'vue-router';
+import MainPage from "@/pages/PostsPage.vue";
 
 import {commonPaths} from "@/settings/commonPaths";
 
 export const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
       {
-        path: commonPaths.default,
+        path: commonPaths.INDEX,
         component: WelcomePage,
         meta:{
           layout: 'WelcomeLayout',
         }
       },
       {
-        path: commonPaths.main,
+        path: commonPaths.POSTS,
         component: MainPage,
-        meta:{
-        }
+        meta:{}
+      },
+      {
+        path: commonPaths.CREATE_POST,
+        component: CreatePostPage,
+        meta:{}
       },
     ]
   }
