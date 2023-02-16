@@ -2,8 +2,8 @@
   <v-layout align-center>
     <app-bar/>
     <nav-bar/>
-    <v-main style="min-height: 300px;">
-      <v-container>
+    <v-main class="main">
+      <v-container class="main__container">
         <router-view/>
       </v-container>
     </v-main>
@@ -20,6 +20,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .main {
+    width: 100%;
+    min-height: 100vh;
 
+    &__container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 </style>
