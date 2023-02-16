@@ -9,14 +9,14 @@ export const router = createRouter({
     history: createWebHashHistory(),
     routes: [
       {
-        path: commonPaths.default,
+        path: commonPaths.DEFAULT,
         component: WelcomePage,
         meta:{
           layout: 'WelcomeLayout',
         }
       },
       {
-        path: commonPaths.main,
+        path: commonPaths.MAIN,
         component: MainPage,
         meta:{
         }

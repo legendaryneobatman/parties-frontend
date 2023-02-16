@@ -1,4 +1,4 @@
 export const commonPaths = {
-  default: '/',
-  main: '/main'
+  DEFAULT: '/',
+  MAIN: '/main'
 }
