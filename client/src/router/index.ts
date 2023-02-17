@@ -20,7 +20,7 @@ export const router = createRouter({
       {
         path: commonPaths.POSTS,
         component: MainPage,
-        meta:{}
+        meta:{},
       },
       {
         path: commonPaths.CREATE_POST,
