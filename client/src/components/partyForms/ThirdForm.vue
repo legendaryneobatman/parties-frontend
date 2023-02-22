@@ -4,9 +4,15 @@
         <v-card-subtitle>Заполните поля</v-card-subtitle>
         <v-card-item>
             <v-form>
-                <v-checkbox label="Добавить вишлист"></v-checkbox>
+                <v-checkbox
+                    v-model="thirdModel.wishList"
+                    label="Добавить вишлист"
+                />
             </v-form>
-            <v-file-input label="Добавьте картинку"/>
+            <v-file-input
+                v-model="thirdModel.img"
+                label="Добавьте картинку"
+            />
             <v-card-actions>
                 <v-btn
                     color="green"
@@ -15,7 +21,12 @@
                 >
                     Далее
                 </v-btn>
-                <v-btn color="red" variant="outlined">Отмена</v-btn>
+                <v-btn
+                    color="red"
+                    variant="outlined"
+                >
+                    Отмена
+                </v-btn>
             </v-card-actions>
         </v-card-item>
     </v-card>
@@ -26,15 +37,15 @@
 import {reactive} from "vue";
 import CustomCalendar from "@/components/CustomCalendar.vue";
 
-const party = reactive({
-    date: '',
-    place: '',
+const thirdModel = reactive({
+    wishList: false,
+    img: '',
 })
 
 const emit = defineEmits(['submit'])
 
 const onSubmit = () => {
-    emit('submit', party)
+    emit('submit', thirdModel)
 }
 </script>
 

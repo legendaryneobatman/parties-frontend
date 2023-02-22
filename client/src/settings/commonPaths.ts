@@ -1,5 +1,5 @@
 export const commonPaths = {
   INDEX: '/',
-  POSTS: '/post',
-  CREATE_POST: '/post/create',
+  PARTY: '/party',
+  CREATE_PARTY: '/party/create',
 }

@@ -5,16 +5,16 @@
         <v-card-item>
             <v-form>
                 <custom-calendar
-                    v-model="party.date"
+                    v-model="secondModel.date"
                     label="Дата и время"
                 ></custom-calendar>
 
                 <v-text-field
-                    v-model="party.place"
+                    v-model="secondModel.place.name"
                     label="Название места"
                 ></v-text-field>
                 <v-text-field
-                    v-model="party.place"
+                    v-model="secondModel.place.link"
                     label="Ссылка на место"
                 ></v-text-field>
             </v-form>
@@ -36,15 +36,18 @@
 import {reactive} from "vue";
 import CustomCalendar from "@/components/CustomCalendar.vue";
 
-const party = reactive({
+const secondModel = reactive({
     date: '',
-    place: '',
+    place: {
+        name: '',
+        link: ''
+    },
 })
 
 const emit = defineEmits(['submit'])
 
 const onSubmit = () => {
-    emit('submit', party)
+    emit('submit', secondModel)
 }
 </script>
 

@@ -3,7 +3,7 @@ import CreatePostPage from "@/pages/CreatePostPage.vue";
 export {}
 import WelcomePage from "@/pages/WelcomePage.vue";
 import {createRouter, createWebHistory} from 'vue-router';
-import MainPage from "@/pages/PostsPage.vue";
+import MainPage from "@/pages/PartiesPage.vue";
 
 import {commonPaths} from "@/settings/commonPaths";
 
@@ -18,12 +18,12 @@ export const router = createRouter({
         }
       },
       {
-        path: commonPaths.POSTS,
+        path: commonPaths.PARTY,
         component: MainPage,
         meta:{},
       },
       {
-        path: commonPaths.CREATE_POST,
+        path: commonPaths.CREATE_PARTY,
         component: CreatePostPage,
         meta:{}
       },

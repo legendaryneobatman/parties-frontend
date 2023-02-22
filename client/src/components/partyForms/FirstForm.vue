@@ -5,15 +5,15 @@
     <v-card-item>
       <v-form>
         <v-text-field
-            v-model="post.title"
+            v-model="firstModel.title"
             label="Название"
         ></v-text-field>
         <v-text-field
-            v-model="post.subtitle"
+            v-model="firstModel.subtitle"
             label="Тема"
         ></v-text-field>
         <v-textarea
-            v-model="post.text"
+            v-model="firstModel.text"
             label="Описание"
         ></v-textarea>
       </v-form>
@@ -35,7 +35,7 @@
 
 import {reactive} from "vue";
 
-const post = reactive({
+const firstModel = reactive({
   title: '',
   subtitle: '',
   text: '',
@@ -45,7 +45,7 @@ const post = reactive({
 const emit = defineEmits(['submit'])
 
 const onSubmit = () => {
-    emit('submit', post)
+    emit('submit', firstModel)
 }
 
 

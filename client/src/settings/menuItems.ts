@@ -7,8 +7,8 @@ export const menuItems = [
     icon: 'mdi-star',
   },
   {
-    label: 'Posts',
-    path: commonPaths.POSTS,
+    label: 'Parties',
+    path: commonPaths.PARTY,
     icon: 'mdi-note-multiple-outline',
   },
 ];

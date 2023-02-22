@@ -14,6 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import {router} from "@/router"
 import WizardComponent from "@/components/UI/WizardComponent.vue";
 import {computed, markRaw, reactive, ref} from "vue";
 import FirstForm from "@/components/partyForms/FirstForm.vue";
@@ -26,11 +27,16 @@ const steps = reactive([
     { id:3, title: 'Третий' },
 ])
 let currentStep = ref(1)
-const nextStep = () => {
+
+const partyModel = reactive({})
+function nextStep(model) {
+    Object.assign(partyModel, model)
     if ( steps[currentStep.value] ) {
         currentStep.value += 1
     } else {
-        currentStep.value = 1
+        router.push({path: '/party', replace: true})
+        console.log('create post request (partyModel)')
+
     }
 }
 
