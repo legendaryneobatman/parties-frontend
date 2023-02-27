@@ -11,7 +11,7 @@
             >
                 {{ step.id }}
             </div>
-            <div class="wizard__title">
+            <div class="wizard__title text">
                 {{ step.title }}
             </div>
         </div>
@@ -43,7 +43,7 @@ defineProps({
             .wizard__circle {
                 &:after {
                     content:'';
-                    width: calc(100% + 180px);
+                    width: calc(100% + 170px);
                     height: 4px;
                     position: absolute;
                     background-color: #A7D3AE;
@@ -62,13 +62,15 @@ defineProps({
         height: 40px;
         background-color: #A7D3AE;
         &--active {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             font-size: 32px;
+            font-weight: bold;
         }
     }
     &__title {
-
+      max-width: 100px;
+      text-align: center;
     }
 }
 

@@ -17,26 +17,27 @@
 import {router} from "@/router"
 import WizardComponent from "@/components/UI/WizardComponent.vue";
 import {computed, markRaw, reactive, ref} from "vue";
-import FirstForm from "@/components/partyForms/FirstForm.vue";
-import SecondForm from "@/components/partyForms/SecondForm.vue";
-import ThirdForm from "@/components/partyForms/ThirdForm.vue";
+import FirstForm from "@/components/partyCreateForms/FirstForm.vue";
+import SecondForm from "@/components/partyCreateForms/SecondForm.vue";
+import ThirdForm from "@/components/partyCreateForms/ThirdForm.vue";
+import { createParty } from "@/api";
+import { CreatePartyRequest } from "@/dto/CreatePartyRequest";
 
 const steps = reactive([
-    { id:1, title: 'Первый' },
-    { id:2, title: 'Второй' },
-    { id:3, title: 'Третий' },
+    { id:1, title: 'Название и описание' },
+    { id:2, title: 'Место и время' },
+    { id:3, title: 'Еще немного' },
 ])
 let currentStep = ref(1)
 
-const partyModel = reactive({})
+const partyModel = reactive<CreatePartyRequest>({})
 function nextStep(model) {
     Object.assign(partyModel, model)
     if ( steps[currentStep.value] ) {
         currentStep.value += 1
     } else {
-        router.push({path: '/party', replace: true})
-        console.log('create post request (partyModel)')
-
+        router.push({path: '/all', replace: true})
+        createParty<CreatePartyRequest>(partyModel);
     }
 }
 

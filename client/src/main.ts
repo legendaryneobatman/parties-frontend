@@ -9,6 +9,7 @@ import * as directives from 'vuetify/directives'
 import {router} from "@/router";
 import {createPinia} from "pinia";
 import {aliases, mdi} from "vuetify/iconsets/mdi";
+import VueLazyLoad from 'vue3-lazyload'
 
 const vuetify = createVuetify({
   components,
@@ -27,6 +28,7 @@ const pinia = createPinia()
 loadFonts()
 
 createApp(App)
+  .use(VueLazyLoad)
   .use(vuetify)
   .use(router)
   .use(pinia)

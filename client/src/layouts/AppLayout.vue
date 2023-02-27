@@ -1,7 +1,6 @@
 <template>
   <v-layout align-center>
     <app-bar/>
-    <nav-bar/>
     <v-main class="main">
       <v-container class="main__container">
         <router-view/>
@@ -12,11 +11,10 @@
 
 <script lang="ts">
 import AppBar from "@/components/AppBar.vue";
-import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "AppLayout",
-  components: {NavBar, AppBar}
+  components: {AppBar}
 }
 </script>
 
@@ -24,12 +22,12 @@ export default {
   .main {
     width: 100%;
     min-height: 100vh;
+    background-color: #F5F5F5;
 
     &__container {
+      margin-top: 100px;
+      max-width: 1274px;
       height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 </style>
