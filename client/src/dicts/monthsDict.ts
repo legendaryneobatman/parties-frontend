@@ -1,4 +1,4 @@
-export const months = {
+export const months: Record<number, string> = {
   1: 'Января',
   2: 'Февраля',
   3: 'Марта',

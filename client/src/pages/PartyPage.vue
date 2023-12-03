@@ -52,7 +52,8 @@
 
 <script setup>
 import PhotoCard from "@/components/UI/PhotoCard.vue";
-import { createFile, getOnePartyById } from "@/api";
+import { createFile } from "@/api/file";
+import { getOnePartyById } from "@/api/party";
 import { computed, reactive } from "vue";
 import { months } from "@/dicts/monthsDict";
 import AddCard from "@/components/UI/AddCard.vue";

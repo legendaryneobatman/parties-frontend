@@ -20,7 +20,7 @@ import {computed, markRaw, reactive, ref} from "vue";
 import FirstForm from "@/components/partyCreateForms/FirstForm.vue";
 import SecondForm from "@/components/partyCreateForms/SecondForm.vue";
 import ThirdForm from "@/components/partyCreateForms/ThirdForm.vue";
-import { createParty } from "@/api";
+import { createParty } from "@/api/party";
 import { CreatePartyRequest } from "@/dto/CreatePartyRequest";
 
 const steps = reactive([

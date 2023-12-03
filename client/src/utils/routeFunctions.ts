@@ -14,7 +14,7 @@ export function goToProfilePage() {
 }
 
 export function goToRegisterPage() {
-  return router.push({ path: commonPaths.REGISTER })
+  return router.push({ path: commonPaths.SIGN_UP })
 }
 export function goToLoginPage() {
   return router.push({ path: commonPaths.LOGIN })

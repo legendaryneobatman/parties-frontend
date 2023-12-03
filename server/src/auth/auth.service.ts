@@ -12,6 +12,10 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { Users } from '../users/users.entity';
 
+export interface ISignInResponse {
+  token: string;
+}
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,11 +23,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(userDto: CreateUserDto) {
+  async signIn(userDto: CreateUserDto): Promise<ISignInResponse> {
     const user = await this.validateUser(userDto);
     return this.generateToken(user);
   }
-  async registration(userDto: CreateUserDto) {
+  async signUp(userDto: CreateUserDto): Promise<ISignInResponse> {
     const candidate = await this.userService.getUsersByEmail(userDto.email);
     if (candidate) {
       throw new HttpException(

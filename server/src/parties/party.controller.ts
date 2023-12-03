@@ -10,7 +10,7 @@ export class PartyController {
   create(@Body() partyDto: CreatePartyDto) {
     return this.partyService.createParty(partyDto);
   }
-  @Get('/all')
+  @Get('/')
   @UseGuards(JwtAuthGuard)
   getAll() {
     return this.partyService.getAllParties();

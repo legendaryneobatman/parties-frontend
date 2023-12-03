@@ -16,21 +16,16 @@
           Архив
         </v-btn>
         <v-divider vertical class="mr-4"></v-divider>
-        <div v-if="store.isLogin" class="account" @click="goToProfilePage()">
-          <div class="account__name">Максим</div>
-          <img :src="avatar" class="account__img"/>
-        </div>
-        <div v-else>
-          <v-btn class="menu__btn" variant="text" @click="goToRegisterPage">Зарегистрироваться</v-btn>
-          <v-btn class="menu__btn" variant="text" @click="goToLoginPage">Войти</v-btn>
-        </div>
+<!--        <div v-if="store.isLogin" class="account" @click="goToProfilePage()">-->
+<!--          <div class="account__name">Максим</div>-->
+<!--          <img :src="avatar" class="account__img"/>-->
+<!--        </div>-->
       </div>
     </div>
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
-import avatar from "@/assets/max-avatar.png"
 import logo from "@/assets/logo.svg"
 import {
   goToPartyCreatePage,
@@ -39,9 +34,7 @@ import {
   goToRegisterPage,
   goToLoginPage
 } from "@/utils/routeFunctions";
-import { useAppStore } from "@/store";
 
-const store = useAppStore()
 
 </script>
 
