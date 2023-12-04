@@ -21,7 +21,7 @@ const emit = defineEmits(['onCardClick'])
 
 const restParty = computed(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {img, title, subtitle, wishList, id, ...rest} = props.party
+  const {img, title, subtitle, wishList, id, assignedUsers, ...rest} = props.party
   return rest
 })
 

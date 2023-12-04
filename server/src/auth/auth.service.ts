@@ -1,9 +1,7 @@
 import {
-  Body,
   HttpException,
   HttpStatus,
   Injectable,
-  Post,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -28,9 +26,9 @@ export class AuthService {
     return this.generateToken(user);
   }
   async signUp(userDto: CreateUserDto): Promise<ISignInResponse> {
-    const candidate = await this.userService.getUserByUsername(
-      userDto.username,
-    );
+    const candidate = await this.userService.findOne({
+      username: userDto.username,
+    });
     if (candidate) {
       throw new HttpException(
         'Пользователь с таким email уже существует',
@@ -46,14 +44,13 @@ export class AuthService {
   }
 
   private async generateToken(user: User) {
-    const payload = { email: user.email, id: user.id };
     return {
-      token: this.jwtService.sign(payload),
+      token: this.jwtService.sign({ ...user }),
     };
   }
 
   private async validateUser(userDto: CreateUserDto) {
-    const user = await this.userService.getUserByUsername(userDto.username);
+    const user = await this.userService.findOne({ username: userDto.username });
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,

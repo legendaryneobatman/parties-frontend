@@ -7,4 +7,5 @@ export interface IParty {
   address: string;
   wishList: boolean;
   img: string;
+  assignedUsers: number[];
 }

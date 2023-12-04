@@ -29,7 +29,7 @@ export class PartyService {
       subtitle: party.subtitle,
       text: party.text,
       date: party.date,
-      wishList: party.wishList,
+      hasWishList: party.hasWishList,
       img: party.img,
       address: party.address,
       files: party.files,

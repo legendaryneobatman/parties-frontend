@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Party } from './party.entity';
 import { Files } from '../files/files.entity';
 import { AuthModule } from '../auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { AuthModule } from '../auth/auth.module';
     forwardRef(() => AuthModule),
   ],
   controllers: [PartyController],
-  providers: [PartyService],
+  providers: [PartyService, JwtService],
   exports: [PartyService, TypeOrmModule],
 })
 export class PartyModule {}

@@ -14,8 +14,10 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from '../utils/file-upload';
 import { FilesService } from './files.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('files')
+@ApiTags('Files')
 export class FilesController {
   constructor(private filesService: FilesService) {}
   // upload single file

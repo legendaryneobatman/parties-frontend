@@ -1,4 +1,4 @@
-import CreatePostPage from "@/pages/CreatePostPage.vue";
+import CreatePostPage from "@/pages/PartyCreationPage.vue";
 import {createRouter, createWebHistory, RouteLocationNormalized} from 'vue-router';
 import PartiesPage from "@/pages/PartiesPage.vue";
 import {commonPaths} from "@/settings/commonPaths";
@@ -49,13 +49,11 @@ export const router = createRouter({
 
 
 async function loadLayoutMiddleware(route: RouteLocationNormalized) {
-  try {
-    const { layout } = route.meta
-    route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
-  } catch (e) {
-    const layout = 'AppLayout'
-    route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
+    let { layout } = route.meta
+  if (!layout) {
+    layout = LayoutEnum.AppLayout
   }
+  route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
 }
 
 router.beforeEach(loadLayoutMiddleware)

@@ -5,4 +5,5 @@ export interface CreatePartyRequest {
   date: Date;
   wishList: boolean;
   img: string;
+  assignedUsers: number[];
 }

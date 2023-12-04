@@ -1,9 +1,16 @@
 import {defineStore} from "pinia";
 import {ICreateUser, ISignInForm, signIn, signUp} from "@/api/auth";
 import Cookies from "js-cookie";
+import {IUser} from "@/api/user";
 
-const getDefaultStore = () => ({
+export interface IUserState {
+  isLogin: boolean,
+  users: IUser[],
+}
+
+const getDefaultStore = (): IUserState => ({
   isLogin: !!Cookies.get('token'),
+  users: [],
 })
 
 export const useUserStore = defineStore('user', {
@@ -22,6 +29,6 @@ export const useUserStore = defineStore('user', {
     onSignOut() {
       Cookies.remove('token');
       this.isLogin = false
-    }
+    },
   },
 })

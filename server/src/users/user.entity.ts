@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from '@nestjs/class-transformer';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Party } from '../parties/party.entity';
 
 @Entity()
 export class User {
@@ -7,9 +15,15 @@ export class User {
 
   @Column()
   username: string;
+
   @Column()
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
+
+  @ManyToMany(() => Party)
+  @JoinTable()
+  assignedParties: Party[];
 }
