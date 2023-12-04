@@ -5,11 +5,13 @@ import { Party } from './parties/party.entity';
 import { FilesModule } from './files/files.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { Files } from './files/files.entity';
-import { UsersService } from './users/users.service';
-import { UsersController } from './users/users.controller';
-import { UsersModule } from './users/users.module';
-import { Users } from './users/users.entity';
+import { UserService } from './users/user.service';
+import { UserController } from './users/user.controller';
+import { UserModule } from './users/user.module';
+import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -21,17 +23,17 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1107',
+      password: '123123',
       database: 'nest-shop',
       synchronize: true,
-      entities: [Party, Files, Users],
+      entities: [Party, Files, User],
     }),
     PartyModule,
     FilesModule,
-    UsersModule,
+    UserModule,
     AuthModule,
   ],
-  providers: [UsersService],
-  controllers: [UsersController],
+  providers: [UserService, JwtService, JwtAuthGuard],
+  controllers: [UserController],
 })
 export class AppModule {}

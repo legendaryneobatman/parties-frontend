@@ -1,24 +1,21 @@
 <script lang="ts" setup>
-import {markRaw, ref, watch} from 'vue'
-import {useRoute} from "vue-router";
+import {useUserStore} from "@/store/user";
+import {getAllUsers} from "@/api/user";
+import {onBeforeMount} from "vue";
 
-const layout = ref()
-const route = useRoute()
+const userStore = useUserStore();
+const fetchAllUsers = async () => {
+  userStore.users = await getAllUsers();
+}
 
-watch(route, async (to) => {
-  if (to.meta.layout !== undefined) {
-    const component = await import(`./layouts/${to.meta.layout}.vue`)
-    layout.value = markRaw(component.default)
-  } else {
-    const component = await import(`./layouts/AppLayout.vue`)
-    layout.value = markRaw( component.default)
-  }
+onBeforeMount(() => {
+  fetchAllUsers();
 })
 </script>
 
 <template>
   <v-app>
-    <component :is="layout"/>
+    <component :is="$route.meta.layoutComponent"/>
   </v-app>
 </template>
 <style lang="scss">

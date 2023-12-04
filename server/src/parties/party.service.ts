@@ -10,7 +10,11 @@ export class PartyService {
     private readonly partyRepository: Repository<Party>,
   ) {}
   async getAllParties(): Promise<Party[]> {
-    return await this.partyRepository.find();
+    const parties = await this.partyRepository.find();
+    if (parties.length) {
+      return parties;
+    }
+    return [];
   }
   async getOneById(id: number): Promise<Party> {
     return await this.partyRepository.findOne({
@@ -25,7 +29,7 @@ export class PartyService {
       subtitle: party.subtitle,
       text: party.text,
       date: party.date,
-      wishList: party.wishList,
+      hasWishList: party.hasWishList,
       img: party.img,
       address: party.address,
       files: party.files,

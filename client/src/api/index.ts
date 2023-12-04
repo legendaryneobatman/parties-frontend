@@ -1,44 +1,32 @@
-import axios from "axios";
-import { PartyResponse } from "@/dto/PartyResponse";
-export async function getAllParties(){
-  try {
-    const response = await axios.get("http://localhost:9876/party/all");
-    return response.data
-  } catch (e) {
-    throw e;
-  }
-}
-export async function getOnePartyById(id: number){
-  try {
-    const response = await axios.get(`http://localhost:9876/party/${id}`);
-    return response.data
-  } catch (e) {
-    throw e;
-  }
-}
+import axios, {HttpStatusCode} from "axios";
+import {useRouter} from "vue-router";
+import Cookies from "js-cookie";
 
-export async function createParty<T1>(requestBody : T1) {
-  try {
-    const response = await axios.post(`http://localhost:9876/party/create`, requestBody);
-    return response.data
-  } catch (e) {
-    throw e;
-  }
-}
+const router = useRouter();
+export const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+})
 
-export async function createFile(imageFile: File, id: number) {
-  const bodyFormData = new FormData();
-  bodyFormData.append('image', imageFile);
-  bodyFormData.append('partyId', id.toString())
-  try {
-    const response = await axios({
-      method: "post",
-      url: "http://localhost:9876/files",
-      data: bodyFormData,
-      headers: { "Content-type": "multipart/form-data" }
-    })
-    return response.data
-  } catch (e) {
-    throw e;
+axiosInstance.interceptors.request.use(
+  config => {
+    const token = Cookies.get('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    return config
+  },
+  error => Promise.reject(error)
+)
+
+axiosInstance.interceptors.response.use(
+  response => response,
+  (error) => {
+    if (error?.response?.status === HttpStatusCode.Unauthorized) {
+      router.push({name: 'login'})
+      return;
+    }
+
+    return Promise.reject(error)
   }
-}
+)

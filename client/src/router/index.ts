@@ -1,14 +1,13 @@
-import CreatePostPage from "@/pages/CreatePostPage.vue";
-
-export {}
-import {createRouter, createWebHistory} from 'vue-router';
+import CreatePostPage from "@/pages/PartyCreationPage.vue";
+import {createRouter, createWebHistory, RouteLocationNormalized} from 'vue-router';
 import PartiesPage from "@/pages/PartiesPage.vue";
 import {commonPaths} from "@/settings/commonPaths";
 import partyPage from "@/pages/PartyPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
-import LoginPage from "@/pages/LoginPage.vue";
-import RegisterPage from "@/pages/RegisterPage.vue";
-
+import SignInPage from "@/pages/SignInPage.vue";
+import SignUpPage from "@/pages/SignUpPage.vue";
+import {LayoutEnum} from "@/router/@types";
+import Cookies from "js-cookie";
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -24,23 +23,55 @@ export const router = createRouter({
         path: commonPaths.PARTY_PAGE,
         name: 'partyPage',
         component: partyPage,
-        props: true
+        props: true,
       },
       {
         path: commonPaths.PROFILE,
-        component: ProfilePage
+        component: ProfilePage,
       },
       {
-        path: commonPaths.LOGIN,
-        component: LoginPage
+        path: commonPaths.SIGN_IN,
+        component: SignInPage,
+        meta: {
+          layout: LayoutEnum.LoginLayout
+        }
       },
       {
-        path: commonPaths.REGISTER,
-        component: RegisterPage
+        path: commonPaths.SIGN_UP,
+        component: SignUpPage,
+        meta: {
+          layout: LayoutEnum.LoginLayout
+        }
       }
     ]
   }
 );
+
+
+async function loadLayoutMiddleware(route: RouteLocationNormalized) {
+    let { layout } = route.meta
+  if (!layout) {
+    layout = LayoutEnum.AppLayout
+  }
+  route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
+}
+
+router.beforeEach(loadLayoutMiddleware)
+router.beforeEach((to, from, next) => {
+  const tokenExists = Cookies.get('token');
+
+  if (!tokenExists && to.path !== commonPaths.SIGN_IN && to.path !== commonPaths.SIGN_UP) {
+    next(commonPaths.SIGN_IN);
+    return;
+  }
+
+  if (tokenExists && (to.path === commonPaths.SIGN_IN || to.path === commonPaths.SIGN_UP)) {
+    next(commonPaths.MAIN);
+    return;
+  }
+
+  next();
+});
 
 declare module 'vue-router' {
   interface RouteMeta {

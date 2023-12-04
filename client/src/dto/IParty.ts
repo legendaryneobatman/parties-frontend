@@ -1,4 +1,4 @@
-export interface PartyResponse {
+export interface IParty {
   id: number;
   title: string;
   subtitle: string;
@@ -7,4 +7,5 @@ export interface PartyResponse {
   address: string;
   wishList: boolean;
   img: string;
+  assignedUsers: number[];
 }

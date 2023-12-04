@@ -1,38 +1,31 @@
 <template>
-  <div class="card" @click="toCard(id)">
-    <img v-lazy="{ src: img, error: 'https://cdn-icons-png.flaticon.com/512/3763/3763189.png'}" class="card__img">
-    <div class="card__mask">
-      <div class="card__date">
-        {{ localeDate }}
-      </div>
-      <div class="card__title">
-        {{ props.text }}
-      </div>
-    </div>
-  </div>
+  <v-card :image="props.party.img" class="card rounded-xl ma-2" @click="toCard(props.party.id)">
+    <v-card-title>{{ props.party.title }}</v-card-title>
+    <v-card-subtitle>{{ props.party.subtitle }}</v-card-subtitle>
+    <v-card-text>
+      <v-card-item v-for="(key) in restParty" :key="`${key}`">{{ key}}</v-card-item>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup lang="ts">
 
-import { months } from "@/dicts/monthsDict";
 import { computed } from "vue";
+import {IParty} from "@/dto/IParty";
 
 export interface IPartyCardProps {
-  id: number,
-  date: Date,
-  text: string,
-  img: string,
+  party: IParty,
 }
 const props = defineProps<IPartyCardProps>()
+const emit = defineEmits(['onCardClick'])
 
-const localeDate = computed(() => {
-  const currentMonths = (new Date(props.date)).getMonth()
-  const currentDate = (new Date(props.date)).getDate()
-  return `${ currentDate } ${ months[currentMonths] }`
+const restParty = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {img, title, subtitle, wishList, id, assignedUsers, ...rest} = props.party
+  return rest
 })
 
-const emit = defineEmits(['onCardClick'])
-function toCard(id: number) {
+const toCard = (id: number) => {
   emit('onCardClick', id)
 }
 </script>
@@ -40,48 +33,11 @@ function toCard(id: number) {
 
 <style scoped lang="scss">
 .card {
-  display: block;
-  position: relative;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  aspect-ratio: 1/1;
 
-
-  &__img {
-    width: 320px;
-    height: 320px;
-    border-radius: 36px;
-    &[error] {
-      background-color: #838383;
-      color: #838383;
-    }
-  }
-
-  &__mask {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 50px;
-    justify-content: center;
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    border-radius: 36px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .4);
-    font-size: 20px;
-    color: #ffffff;
-    text-align: center;
-    opacity: 0;
-    &:hover {
-      transition: 0.2s ease-in-out;
-      opacity: 1;
-    }
-  }
-  &__date {
-    font-size: 36px;
-    font-weight: bold;
-  }
+  border: 2px solid rgba(0, 0, 0, 0.09);
 }
 </style>

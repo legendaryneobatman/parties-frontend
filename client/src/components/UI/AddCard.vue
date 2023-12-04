@@ -1,45 +1,19 @@
 <template>
-  <div
-    class="add-card"
-    :style="{ width: props.width, height: props.height }"
-  >
-    <slot></slot>
-  </div>
+  <v-card class="card rounded-xl ma-2">
+    <v-icon icon="mdi-plus" class="icon w-100 h-100" size="64"/>
+  </v-card>
 </template>
 
 <script setup lang="ts">
-export interface ICardProps {
-    width: {
-      type: string,
-      required: false,
-    }
-    height: {
-      type: string,
-      required: false,
-    }
-}
-
-const props = defineProps<ICardProps>()
-
 
 </script>
 
 <style scoped lang="scss">
-.add-card {
+.card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 96px;
-  width: 320px;
-  height: 320px;
-  color: #CBCBCB;
-  background-color: #F2F2F2;
-  border-radius: 36px;
-  &:hover {
-   background-color: #dfdfdf;
-   color: #b5b5b5;
-   transition: 0.2s ease;
- }
+  flex-direction: column;
+  justify-items: center;
+
+  border: 2px solid rgba(0, 0, 0, 0.09);
 }
 </style>
