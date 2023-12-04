@@ -22,6 +22,7 @@ import SecondForm from "@/components/partyCreateForms/SecondForm.vue";
 import ThirdForm from "@/components/partyCreateForms/ThirdForm.vue";
 import { createParty } from "@/api/party";
 import { CreatePartyRequest } from "@/dto/CreatePartyRequest";
+import {commonPaths} from "@/settings/commonPaths";
 
 const steps = reactive([
     { id:1, title: 'Название и описание' },
@@ -36,7 +37,7 @@ function nextStep(model) {
     if ( steps[currentStep.value] ) {
         currentStep.value += 1
     } else {
-        router.push({path: '/all', replace: true})
+        router.push({path: commonPaths.MAIN, replace: true})
         createParty<CreatePartyRequest>(partyModel);
     }
 }

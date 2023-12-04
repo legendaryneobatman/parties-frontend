@@ -7,10 +7,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { UsersService } from '../users/users.service';
+import { UserService } from '../users/user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import { Users } from '../users/users.entity';
+import { User } from '../users/user.entity';
 
 export interface ISignInResponse {
   token: string;
@@ -19,7 +19,7 @@ export interface ISignInResponse {
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -28,7 +28,9 @@ export class AuthService {
     return this.generateToken(user);
   }
   async signUp(userDto: CreateUserDto): Promise<ISignInResponse> {
-    const candidate = await this.userService.getUsersByEmail(userDto.email);
+    const candidate = await this.userService.getUserByUsername(
+      userDto.username,
+    );
     if (candidate) {
       throw new HttpException(
         'Пользователь с таким email уже существует',
@@ -43,7 +45,7 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  private async generateToken(user: Users) {
+  private async generateToken(user: User) {
     const payload = { email: user.email, id: user.id };
     return {
       token: this.jwtService.sign(payload),
@@ -51,7 +53,7 @@ export class AuthService {
   }
 
   private async validateUser(userDto: CreateUserDto) {
-    const user = await this.userService.getUsersByEmail(userDto.email);
+    const user = await this.userService.getUserByUsername(userDto.username);
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,

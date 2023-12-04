@@ -18,8 +18,8 @@ const onCardClick = (id: number) => {
 </script>
 
 <template>
-  <add-card @click="goToPartyCreatePage">+</add-card>
   <div class="party-grid">
+    <add-card @click="goToPartyCreatePage"/>
     <party-card
       v-for="party in parties"
       :key="party.id"
@@ -32,8 +32,8 @@ const onCardClick = (id: number) => {
 
 <style scoped lang="scss">
 .party-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 </style>

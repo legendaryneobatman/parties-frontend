@@ -4,8 +4,8 @@ import PartiesPage from "@/pages/PartiesPage.vue";
 import {commonPaths} from "@/settings/commonPaths";
 import partyPage from "@/pages/PartyPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
-import LoginPage from "@/pages/SignInPage.vue";
-import RegisterPage from "@/pages/SignUpPage.vue";
+import SignInPage from "@/pages/SignInPage.vue";
+import SignUpPage from "@/pages/SignUpPage.vue";
 import {LayoutEnum} from "@/router/@types";
 import Cookies from "js-cookie";
 export const router = createRouter({
@@ -30,15 +30,15 @@ export const router = createRouter({
         component: ProfilePage,
       },
       {
-        path: commonPaths.LOGIN,
-        component: LoginPage,
+        path: commonPaths.SIGN_IN,
+        component: SignInPage,
         meta: {
           layout: LayoutEnum.LoginLayout
         }
       },
       {
         path: commonPaths.SIGN_UP,
-        component: RegisterPage,
+        component: SignUpPage,
         meta: {
           layout: LayoutEnum.LoginLayout
         }
@@ -51,7 +51,7 @@ export const router = createRouter({
 async function loadLayoutMiddleware(route: RouteLocationNormalized) {
   try {
     const { layout } = route.meta
-    route.meta.layoutComponent = (await import(`@/layouts/${layout}.vue`)).default
+    route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
   } catch (e) {
     const layout = 'AppLayout'
     route.meta.layoutComponent = (await import(`../layouts/${layout}.vue`)).default
@@ -62,12 +62,12 @@ router.beforeEach(loadLayoutMiddleware)
 router.beforeEach((to, from, next) => {
   const tokenExists = Cookies.get('token');
 
-  if (!tokenExists && to.path !== commonPaths.LOGIN && to.path !== commonPaths.SIGN_UP) {
-    next(commonPaths.LOGIN);
+  if (!tokenExists && to.path !== commonPaths.SIGN_IN && to.path !== commonPaths.SIGN_UP) {
+    next(commonPaths.SIGN_IN);
     return;
   }
 
-  if (tokenExists && (to.path === commonPaths.LOGIN || to.path === commonPaths.SIGN_UP)) {
+  if (tokenExists && (to.path === commonPaths.SIGN_IN || to.path === commonPaths.SIGN_UP)) {
     next(commonPaths.MAIN);
     return;
   }

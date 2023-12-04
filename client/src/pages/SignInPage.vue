@@ -1,5 +1,5 @@
 <template>
-    <login-form @on-sign-in="onSignIn" @on-sign-up="onSignUp"></login-form>
+  <login-form @on-sign-in="onSignIn" @on-sign-up="onSignUp"></login-form>
 </template>
 
 <script setup lang="ts">
@@ -13,8 +13,11 @@ import {useUserStore} from "@/store/user";
 const router = useRouter();
 const userStore = useUserStore();
 
-const onSignIn = (payload: ICreateUser) => {
-  userStore.onSignIn(payload)
+const onSignIn = async (payload: ICreateUser) => {
+  await userStore.onSignIn(payload)
+  await router.push({
+    path: commonPaths.MAIN,
+  })
 }
 const onSignUp = () => {
   router.push({

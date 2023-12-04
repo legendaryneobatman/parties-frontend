@@ -1,33 +1,24 @@
 <template>
   <v-card class="login-form rounded-lg">
     <v-card-title>Вход</v-card-title>
-    <v-card-item class="w-100">
+    <v-item-group class="w-100 h-100 pa-2">
       <v-text-field
-          v-model="form.name"
+          v-model="form.username"
           class="w-100"
+          variant="outlined"
           label="Логин"
           type="text"
           required
       />
-    </v-card-item>
-    <v-card-item class="w-100">
       <v-text-field
-          v-model="form.password"
-          label="Пароль"
-          type="password"
-          required
-          class="w-100"
-      />
-    </v-card-item>
-    <v-card-item class="w-100">
-      <v-text-field
-        v-model="form.email"
-        label="E-mail"
-        type="email"
+        v-model="form.password"
+        label="Пароль"
+        type="password"
         required
         class="w-100"
+        variant="outlined"
       />
-    </v-card-item>
+    </v-item-group>
 
     <v-card-actions class="login-form__actions">
       <v-btn
@@ -37,7 +28,7 @@
           size="large"
           class="mt-4"
           block
-          @click="onLogin"
+          @click="onSignIn"
       >
         <template #prepend>
           <v-icon color="success"></v-icon>
@@ -67,13 +58,12 @@ import {ICreateUser} from "@/api/auth";
 
 const emit = defineEmits(['onSignIn', 'onSignUp']);
 
-const form = reactive<ICreateUser>({
-  name: "",
-  email: "",
+const form = reactive<Partial<ICreateUser>>({
+  username: "",
   password: "",
 })
 
-const onLogin = () => emit('onSignIn', form);
+const onSignIn = () => emit('onSignIn', form);
 const onSignUp = () => emit('onSignUp');
 </script>
 

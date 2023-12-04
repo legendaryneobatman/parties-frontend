@@ -4,7 +4,6 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 
@@ -22,13 +21,13 @@ export class JwtAuthGuard implements CanActivate {
         secret: jwtConstants.secret,
       });
       request['user'] = payload;
-    } catch {
+    } catch (e) {
       throw new UnauthorizedException();
     }
     return true;
   }
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+  private extractTokenFromHeader(request: any): string | undefined {
+    const [type, token] = request.headers?.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 }

@@ -9,7 +9,7 @@ import logo from "@/assets/logo.svg";
       <v-img class="w-auto h-100" :src="logo"/>
     </v-app-bar>
     <v-main>
-      <v-container class="container">
+      <v-container class="fill-height justify-center">
         <router-view/>
       </v-container>
     </v-main>
@@ -19,11 +19,5 @@ import logo from "@/assets/logo.svg";
 <style scoped lang="scss">
 .v-main {
   background-color: #E8F8F9;
-}
-.container {
-  height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>

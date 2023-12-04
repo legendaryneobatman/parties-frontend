@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {ICreateUser, signIn, signUp} from "@/api/auth";
+import {ICreateUser, ISignInForm, signIn, signUp} from "@/api/auth";
 import Cookies from "js-cookie";
 
 const getDefaultStore = () => ({
@@ -14,11 +14,14 @@ export const useUserStore = defineStore('user', {
       Cookies.set('token', token);
       this.isLogin = true
     },
-    async onSignIn(payload: ICreateUser) {
+    async onSignIn(payload: ISignInForm) {
       const response =  await signIn(payload);
-      console.log(response)
       Cookies.set('token', response.token);
       this.isLogin = true
+    },
+    onSignOut() {
+      Cookies.remove('token');
+      this.isLogin = false
     }
   },
 })

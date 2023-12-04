@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <parties-grid :parties="parties" @on-card-click="onCardClick"/>
   </div>
 
@@ -24,10 +24,4 @@ const onCardClick = (id: number) => {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-}
-
 </style>

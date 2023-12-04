@@ -7,7 +7,7 @@ const emit = defineEmits(['onSignIn']);
 const onSignIn = () => emit('onSignIn', form);
 
 const form = reactive<ICreateUser>({
-  name: "",
+  username: "",
   email: "",
   password: "",
 })
@@ -19,7 +19,7 @@ const form = reactive<ICreateUser>({
     <v-card-title>Создать пользователя</v-card-title>
     <v-card-item class="w-100">
       <v-text-field
-          v-model="form.name"
+          v-model="form.username"
           class="w-100"
           label="Логин"
           type="text"
