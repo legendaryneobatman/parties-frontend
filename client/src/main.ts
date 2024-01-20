@@ -10,7 +10,7 @@ import {router} from "@/router";
 import {createPinia} from "pinia";
 import {aliases, mdi} from "vuetify/iconsets/mdi";
 import YmapPlugin from 'vue-yandex-maps'
-
+import './assets/main.scss'
 const vuetify = createVuetify({
   components,
   directives,

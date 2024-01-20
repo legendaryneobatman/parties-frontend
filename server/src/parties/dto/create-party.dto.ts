@@ -9,16 +9,10 @@ export class CreatePartyDto {
   readonly title: string;
 
   @ApiProperty({
-    example: 'Афигенное тусе',
-    description: 'Подзаголовок тусовки',
-  })
-  readonly subtitle: string;
-
-  @ApiProperty({
     example: 'тут ваще круту, и тд тд',
     description: 'Описание тусовки',
   })
-  readonly text: string;
+  readonly description: string;
 
   @ApiProperty({
     example: '2023-05-05',
@@ -33,20 +27,14 @@ export class CreatePartyDto {
   readonly address: string;
 
   @ApiProperty({
-    example: 'true',
-    description: 'Есть ли вишлист',
-  })
-  readonly hasWishList: boolean;
-
-  @ApiProperty({
     example: 'img.jpg',
     description: 'Изображение тусовки',
   })
-  readonly img: string;
+  readonly img?: string;
 
   @ApiProperty({
     example: 'img.jpg',
     description: 'Файлы тусовки тусовки',
   })
-  readonly files: Files[];
+  readonly files?: Files[];
 }

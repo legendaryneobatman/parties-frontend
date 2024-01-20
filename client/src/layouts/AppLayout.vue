@@ -1,11 +1,9 @@
 <template>
-  <v-layout align-center>
-    <app-bar/>
-    <v-main class="main">
-      <v-container class="main__container">
+  <v-layout full-height align-center>
+      <v-container>
+        <app-bar class="mt-10 mb-8"/>
         <router-view/>
       </v-container>
-    </v-main>
   </v-layout>
 </template>
 
@@ -19,15 +17,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #F5F5F5;
-
-    &__container {
-      margin-top: 100px;
-      max-width: 1274px;
-      height: 100%;
-    }
-  }
 </style>

@@ -10,10 +10,7 @@ export class Party {
   title: string;
 
   @Column()
-  subtitle: string;
-
-  @Column()
-  text: string;
+  description: string;
 
   @Column()
   date: Date;
@@ -21,11 +18,10 @@ export class Party {
   @Column()
   address: string;
 
-  @Column()
-  hasWishList: boolean;
-
-  @Column()
-  img: string;
+  @Column({
+    nullable: true,
+  })
+  img?: string;
 
   @OneToMany(() => Files, (files) => files.party)
   files: Files[];

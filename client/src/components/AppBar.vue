@@ -1,22 +1,29 @@
 <template>
-  <v-app-bar
-      :color="`#ffffff`"
-  >
-    <v-img :src="logo" alt="" @click="goToMainPage"/>
-    <v-btn-group v-if="userStore.isLogin">
-      <v-btn variant="text" @click="goToPartyCreatePage">
-        Создать +
+  <header class="flex items-center">
+    <router-link class="text-indigo-600 text-2xl font-bold" to="/">Тусовки</router-link>
+    <div class="flex items-end ml-16 mr-auto">
+      <router-link
+          :to="commonPaths.PARTIES_PAGE"
+          class="text-gray-500 font-semibold text-base hover:underline underline-offset-4 hover:text-indigo-600 transition-all duration-150 ease-in-out"
+          :class="{['underline']: commonPaths.PARTIES_PAGE === $route.path}"
+      >
+        Список тусовок
+      </router-link>
+    </div>
+    <div class="flex gap-2">
+      <v-btn
+        variant="outlined"
+        class="text-gray-500 hover:text-indigo-600 transition-all duration-150 ease-in-out font-bold"
+        :to="commonPaths.CREATE_PARTY"
+      >
+        Создать тусовку
       </v-btn>
-      <v-btn variant="text" @click="onSignOut">
-        Выйти
-      </v-btn>
-    </v-btn-group>
-  </v-app-bar>
+      <v-btn class="text-gray-500 font-semibold text-base" variant="text" @click="onSignOut">Выйти</v-btn>
+    </div>
+  </header>
 </template>
 
-<script setup lang="ts">
-import logo from "@/assets/logo.svg"
-import {goToMainPage, goToPartyCreatePage,} from "@/utils/routeFunctions";
+<script lang="ts" setup>
 import {useUserStore} from "@/store/user";
 import {commonPaths} from "@/settings/commonPaths";
 import {useRouter} from "vue-router";
@@ -32,6 +39,6 @@ const onSignOut = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

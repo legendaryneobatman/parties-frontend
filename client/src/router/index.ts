@@ -1,19 +1,21 @@
-import CreatePostPage from "@/pages/PartyCreationPage.vue";
+import CreatePostPage from "@/pages/party/PartyCreationPage.vue";
 import {createRouter, createWebHistory, RouteLocationNormalized} from 'vue-router';
-import PartiesPage from "@/pages/PartiesPage.vue";
+import MainPage from "@/pages/MainPage.vue";
 import {commonPaths} from "@/settings/commonPaths";
-import partyPage from "@/pages/PartyPage.vue";
+import partyPage from "@/pages/party/PartyPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
 import SignInPage from "@/pages/SignInPage.vue";
 import SignUpPage from "@/pages/SignUpPage.vue";
 import {LayoutEnum} from "@/router/@types";
 import Cookies from "js-cookie";
+import PartiesPage from "@/pages/party/PartiesPage.vue";
+
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
       {
         path: commonPaths.MAIN,
-        component: PartiesPage,
+        component: MainPage,
       },
       {
         path: commonPaths.CREATE_PARTY,
@@ -23,7 +25,11 @@ export const router = createRouter({
         path: commonPaths.PARTY_PAGE,
         name: 'partyPage',
         component: partyPage,
-        props: true,
+      },
+      {
+        path: commonPaths.PARTIES_PAGE,
+        name: 'partiesPage',
+        component: PartiesPage,
       },
       {
         path: commonPaths.PROFILE,

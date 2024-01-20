@@ -1,12 +1,10 @@
 <script setup lang="ts">
 
-import {goToPartyCreatePage} from "@/utils/routeFunctions";
-import {IParty} from "@/dto/IParty";
 import PartyCard from "@/components/PartyCard.vue";
-import AddCard from "@/components/UI/AddCard.vue";
+import {IPartyReturn} from "@/api/party";
 
 export interface IPartiesGridProps {
-  parties: IParty[]
+  parties: IPartyReturn[]
 }
 
 defineProps<IPartiesGridProps>()
@@ -18,22 +16,15 @@ const onCardClick = (id: number) => {
 </script>
 
 <template>
-  <div class="party-grid">
-    <add-card @click="goToPartyCreatePage"/>
+  <div class="grid grid-cols-4 gap-4">
     <party-card
       v-for="party in parties"
-      :key="party.id"
-      class="ma-1"
+      :key="`${party.title}+${party.description}`"
       :party="party"
-      @on-card-click="onCardClick"
+      @on-card-click="onCardClick(party.id)"
     />
   </div>
 </template>
 
 <style scoped lang="scss">
-.party-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
 </style>

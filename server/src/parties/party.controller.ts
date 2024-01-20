@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { PartyService } from './party.service';
 import { CreatePartyDto } from './dto/create-party.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -25,5 +34,18 @@ export class PartyController {
   @ApiResponse({ status: 201, description: 'Party created successfully' })
   create(@Body() partyDto: CreatePartyDto) {
     return this.partyService.createParty(partyDto);
+  }
+
+  @Put('/:id')
+  @ApiOperation({ summary: 'Update a party' })
+  @ApiBody({ type: CreatePartyDto })
+  update(@Param('id') id: string, @Body() partyDto: CreatePartyDto) {
+    return this.partyService.update(Number(id), partyDto);
+  }
+
+  @Delete('/:id')
+  @ApiOperation({ summary: 'Delete a party' })
+  delete(@Param('id') id: number) {
+    return this.partyService.delete(id);
   }
 }
