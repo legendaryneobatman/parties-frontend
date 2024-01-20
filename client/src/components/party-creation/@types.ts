@@ -7,11 +7,12 @@ export interface IFormField {
   value: string,
 }
 
-export type IPartyGeneralForm = Record<'title' | 'subtitle' | 'text', IFormField>
+export type IPartyGeneralForm = Record<string,
+  IFormField>
 export interface IPartyAdditionalForm {
   date: {
     label: string,
-    value: string[],
+    value: [Date] | [],
   },
   address: IFormField
 }

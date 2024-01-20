@@ -18,6 +18,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(9876, () => console.log('server started on port: 9876'));
+  const POPT = '9876';
+
+  await app.listen(9876, async () => {
+    console.log(`Application running at http://localhost:${POPT}`);
+    console.log(`Application docs at http://localhost:${POPT}/api`);
+  });
 }
 bootstrap();

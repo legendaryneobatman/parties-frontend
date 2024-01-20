@@ -9,10 +9,16 @@
               <component
                   :is="form.component"
                   v-model="formState[index]"
-                  @on-date-update="onDateUpdate"
               />
             </FormWrapper>
           </template>
+<!--          <v-stepper-actions>-->
+<!--            <div>-->
+<!--              <v-btn>Далее</v-btn>-->
+<!--              <v-btn>Назад</v-btn>-->
+<!--            </div>-->
+<!--          </v-stepper-actions>-->
+                      <v-btn @click="onSubmit">Сохранть</v-btn>
         </v-stepper>
       </v-card-item>
     </v-card>
@@ -22,33 +28,26 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import PartyGeneralForm from "@/components/party-creation/forms/PartyGeneralForm.vue";
-import PartyAdditionalForm from "@/components/party-creation/forms/PartyAdditionalForm.vue";
-import ThirdForm from "@/components/party-creation/forms/ThirdForm.vue";
-import {IPartyAdditionalForm, IPartyForm, IPartyGeneralForm} from "@/components/party-creation/@types";
 import FormWrapper from "@/components/party-creation/FormWrapper.vue";
+import {IPartyForm, IPartyGeneralForm} from "@/components/party-creation/@types";
+import {ICreatePartyBody, createParty} from "@/api/party";
 
 const stepsNames = [
   'Название и описание',
   'Место и время',
-  'Еще немного',
 ]
-
 const forms: IPartyForm[] = [
   {
     component: PartyGeneralForm,
     title: 'Название и описание',
   },
   {
-    component: PartyAdditionalForm,
+    component: PartyGeneralForm,
     title: 'Место и время',
   },
-  {
-    component: ThirdForm,
-    title: 'Еще немного',
-  }
 ]
 
-const formState = ref<(IPartyGeneralForm | IPartyAdditionalForm)[]>([
+const formState = ref<IPartyGeneralForm[]>([
   {
     title: {
       label: 'Название тусовки',
@@ -61,23 +60,33 @@ const formState = ref<(IPartyGeneralForm | IPartyAdditionalForm)[]>([
     text: {
       label: 'Описание тусовки',
       value: '',
-    }
+    },
   },
   {
     date: {
       label: 'Дата',
-      value: [],
+      value: '',
     },
     address: {
       label: 'Адрес',
       value: '',
     }
-  }
+  },
 ])
 
-const onDateUpdate = (value: [Date]) => {
-  formState.value[1].date.value = value
+const onSubmit = async () => {
+  const form = formState.value.reduce((acc, formStateItem) => ({...acc, ...formStateItem}), {});
+  const payload = {
+    title: form.title.value,
+    subtitle: form.subtitle.value,
+    description: form.text.value,
+    date: form.date.value,
+    address: form.address.value
+  }
+  console.log(payload)
+  await createParty(payload)
 }
+
 
 const itemNumber = (index: number) => String(index + 1)
 </script>

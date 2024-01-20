@@ -1,18 +1,18 @@
 <template>
   <v-form>
     <v-text-field
-        v-for="(form, key) in compValue"
+        v-for="(form, key) in modelValue"
         :key="form.label"
         :model-value="form.value"
         :label="form.label"
-        @update:model-value="compValue = ({key, value: $event})"
+        @update:model-value="onFieldUpdate({key, value: $event})"
     />
   </v-form>
 </template>
 
 <script setup lang="ts">
-import {computed} from "vue";
 import {IPartyGeneralForm} from "@/components/party-creation/@types";
+import {ValueOf} from "@/utils/@types";
 
 export interface IPartyGeneralFormProps {
   modelValue: IPartyGeneralForm,
@@ -21,16 +21,15 @@ export interface IPartyGeneralFormProps {
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<IPartyGeneralFormProps>()
 
-const compValue = computed({
-  get: () => props.modelValue,
-  set: ({key, value}) => emit('update:modelValue', {
-    ...props.modelValue,
-    [key]: {
-      ...props.modelValue[key],
-      value
-    }
-  })
-})
+  const onFieldUpdate = ({key, value}: {key: keyof IPartyGeneralForm, value: ValueOf<IPartyGeneralForm>}) => {
+    emit(
+      'update:modelValue',
+      {
+      ...props.modelValue,
+      [key]: { ...props.modelValue[key], value }
+      }
+    )
+  };
 </script>
 
 <style scoped>
