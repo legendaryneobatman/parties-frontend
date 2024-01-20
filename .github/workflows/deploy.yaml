@@ -18,6 +18,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd legendaryneobatman-parties-client
-            docker-compose down
+            docker compose down
             git pull origin master
-            docker-compose up --build -d
+            docker compose up --build -d
