@@ -6,17 +6,25 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   server: {
-    hmr: {
-      host: 'localhost'
-    },
+    host: true,
+    port: 8000,
     watch: {
       usePolling: true
     },
-    host: '0.0.0.0',
   },
   resolve: {
     alias: {
       '@': '/src'
     },
   },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {},
+        entryFileNames: 'assets/[name].js',
+      }
+    }
+  }
 })

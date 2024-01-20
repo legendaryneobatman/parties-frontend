@@ -1,17 +1,15 @@
-# Use a Node.js base image for development
 FROM node:16-alpine
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the rest of the application code to the working directory
-COPY . .
+RUN apk --no-cache add openssh git
 
-# Install project dependencies
-RUN npm ci
+COPY package.json /app/
+COPY package-lock.json /app/
 
-# Expose the port your Vue.js app is listening on (default is 8080)
-EXPOSE 3000
+RUN npm ci && npm cache clean --force
 
-# Start the Vue.js development server
-CMD ["npm", "run", "dev"]
+ADD . /app
+
+RUN npm run build
+ENV HOST 0.0.0.0
+EXPOSE 8000

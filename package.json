@@ -7,8 +7,7 @@
     "deploy": "vue-tsc --noEmit && vite build --base '/vue-ts/'",
     "dev": "vite",
     "format": "prettier --write .",
-    "preview": "vite preview",
-    "test": "jest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@date-io/date-fns": "^3.0.0",
@@ -37,7 +36,6 @@
     "autoprefixer": "^10.4.17",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.5.3",
     "eslint-plugin-vue": "^9.1.1",
     "node-sass": "9.0.0",
     "postcss": "^8.4.33",
