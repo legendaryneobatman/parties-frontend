@@ -29,7 +29,4 @@ export class Party {
 
   @OneToMany(() => Files, (files) => files.party)
   files: Files[];
-
-  @Column('integer', { array: true, default: [] })
-  assignedUsers: number[];
 }

@@ -49,10 +49,4 @@ export class CreatePartyDto {
     description: 'Файлы тусовки тусовки',
   })
   readonly files: Files[];
-
-  @ApiProperty({
-    example: '1,2,3',
-    description: 'Пользователи, которым принадлежат тусовки',
-  })
-  readonly assignedUsers: number[];
 }

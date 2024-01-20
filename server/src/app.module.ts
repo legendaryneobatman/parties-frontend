@@ -12,6 +12,7 @@ import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,12 +20,8 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
       dest: './uploads',
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '123123',
-      database: 'nest-shop',
+      type: 'sqlite',
+      database: join(__dirname, '../data', 'nest-shop.sqlite'),
       synchronize: true,
       entities: [Party, Files, User],
     }),
