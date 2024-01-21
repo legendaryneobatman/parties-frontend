@@ -4,4 +4,4 @@ services:
         container_name: parties-frontend
         build: .
         ports:
-            - "80:80"
+            - "8000:80"
