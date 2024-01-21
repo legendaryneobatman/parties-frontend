@@ -19,7 +19,7 @@ ENV HOST 0.0.0.0
 EXPOSE 8000
 
 
-FROM nginx:1.23.1-alpine
+FROM nginx:latest
 COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
 RUN -rf /usr/share/nginx/html/*
 COPY --from=build-stage /app/dist /usr/share/nginx/html
