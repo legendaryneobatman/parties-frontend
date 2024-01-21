@@ -14,14 +14,8 @@ ADD . /app
 
 RUN npm run build
 
+COPY /app/dist /usr/share/nginx/html
+
 ENV HOST 0.0.0.0
 
 EXPOSE 8000
-
-
-FROM nginx:latest
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
-RUN -rf /usr/share/nginx/html/*
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
