@@ -36,8 +36,10 @@ import {onBeforeMount, reactive} from "vue";
 import {createParty, getOnePartyById, ICreatePartyBody, updateParty} from "@/api/party";
 import DatePicker from "@/components/DatePicker.vue";
 import {useRoute, useRouter} from "vue-router";
-import {required} from "@vuelidate/validators";
+import {minValue, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import dayjs from "dayjs";
+import {notBeforeToday} from "@/utils/validators/time";
 
 const route = useRoute();
 const router = useRouter();
@@ -55,14 +57,16 @@ onBeforeMount(async () => {
 const form = reactive<ICreatePartyBody>({
   title: '',
   description: '',
-  date: '',
-  address: ''
+  address: '',
+  date: ''
 })
+
+
 const rules = {
   title: {required},
   description: {required: false},
-  date: {required},
-  address: {required}
+  address: {required},
+  date: {required, notBeforeToday},
 }
 const v$ = useVuelidate(rules, form);
 

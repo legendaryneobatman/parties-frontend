@@ -1,6 +1,6 @@
 export const commonPaths = {
   MAIN: '/',
-  CREATE_PARTY: '/party/create/:id',
+  CREATE_PARTY: '/party/create/:id?',
   PARTY_PAGE: '/party/:id',
   PARTIES_PAGE: '/parties',
   PROFILE: '/profile',

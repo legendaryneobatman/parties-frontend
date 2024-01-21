@@ -11,7 +11,7 @@
         <v-btn
           variant="outlined"
           class="text-gray-500 hover:text-indigo-600 transition-all duration-150 ease-in-out font-bold"
-          :to="commonPaths.CREATE_PARTY"
+          :to="createPartyPath"
         >
           Создать тусовку
         </v-btn>
@@ -23,7 +23,12 @@
 
 <script lang="ts" setup>
 import diamond from '@/assets/images/diamond.webp'
-import {commonPaths} from "@/settings/commonPaths";
+import {commonPaths} from "@/router/commonPaths";
+import {computed} from "vue";
+
+const createPartyPath = computed(() => {
+  return commonPaths.CREATE_PARTY.split(':')[0]
+})
 </script>
 
 <style lang="scss" scoped>

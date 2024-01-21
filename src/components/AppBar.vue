@@ -14,7 +14,7 @@
       <v-btn
         variant="outlined"
         class="text-gray-500 hover:text-indigo-600 transition-all duration-150 ease-in-out font-bold"
-        :to="commonPaths.CREATE_PARTY"
+        :to="createPartyPath"
       >
         Создать тусовку
       </v-btn>
@@ -25,12 +25,16 @@
 
 <script lang="ts" setup>
 import {useUserStore} from "@/store/user";
-import {commonPaths} from "@/settings/commonPaths";
+import {commonPaths} from "@/router/commonPaths";
 import {useRouter} from "vue-router";
+import {computed} from "vue";
 
 const userStore = useUserStore();
 const router = useRouter();
 
+const createPartyPath = computed(() => {
+  return commonPaths.CREATE_PARTY.split(':')[0]
+})
 const onSignOut = () => {
   userStore.onSignOut();
   router.push({

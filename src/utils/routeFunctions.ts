@@ -1,5 +1,5 @@
 import { router } from "@/router";
-import { commonPaths } from "@/settings/commonPaths";
+import { commonPaths } from "@/router/commonPaths";
 
 export function goToPartyCreatePage() {
   return router.push({ path: commonPaths.CREATE_PARTY });
