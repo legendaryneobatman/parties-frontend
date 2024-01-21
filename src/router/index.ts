@@ -1,7 +1,7 @@
 import CreatePostPage from "@/pages/party/PartyCreationPage.vue";
 import {createRouter, createWebHistory, RouteLocationNormalized} from 'vue-router';
 import MainPage from "@/pages/MainPage.vue";
-import {commonPaths} from "@/settings/commonPaths";
+import {commonPaths} from "@/router/commonPaths";
 import partyPage from "@/pages/party/PartyPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
 import SignInPage from "@/pages/SignInPage.vue";

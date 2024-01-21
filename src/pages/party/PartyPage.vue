@@ -24,7 +24,7 @@ import {useRoute, useRouter} from "vue-router";
 
 import {deleteParty, getOnePartyById, IPartyReturn} from "@/api/party";
 import dayjs from "dayjs";
-import {commonPaths} from "@/settings/commonPaths";
+import {commonPaths} from "@/router/commonPaths";
 
 const party = ref<IPartyReturn>({
   id: 0,

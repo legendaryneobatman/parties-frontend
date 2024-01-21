@@ -7,7 +7,7 @@
 import LoginForm from "@/components/auth/LoginForm.vue";
 import {ICreateUser} from "@/api/auth";
 import {useRouter} from "vue-router";
-import {commonPaths} from "@/settings/commonPaths";
+import {commonPaths} from "@/router/commonPaths";
 import {useUserStore} from "@/store/user";
 
 const router = useRouter();
