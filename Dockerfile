@@ -2,7 +2,7 @@ FROM node:16-alpine as builder
 WORKDIR /app
 COPY package.json /app/
 COPY package-lock.json /app/
-RUN npm ci && npm cache clean --force
+RUN npm install
 ADD . /app
 RUN npm run build
 
