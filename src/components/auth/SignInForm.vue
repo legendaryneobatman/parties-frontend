@@ -3,22 +3,22 @@
     <v-card-title class="font-semibold text-center text-4xl pb-16">Вход</v-card-title>
     <v-item-group class="flex flex-col items-end w-100 h-100 mb-4 text-gray-500">
       <v-text-field
-          v-model="form.username"
+          v-model="v$.username.$model"
           class="w-100"
           label="Логин"
+          prepend-inner-icon="mdi-account-circle-outline"
           required
           type="text"
           variant="underlined"
-          prepend-inner-icon="mdi-account-circle-outline"
       />
       <v-text-field
-          v-model="form.password"
+          v-model="v$.password.$model"
           class="w-100"
           label="Пароль"
+          prepend-inner-icon="mdi-lock-outline"
           required
           type="password"
           variant="underlined"
-          prepend-inner-icon="mdi-lock-outline"
       />
       <!--      TODO логика востановления пароля-->
       <a class="text-end cursor-pointer hover:underline">
@@ -73,7 +73,12 @@ const rules = {
 }
 const v$ = useVuelidate(rules, form);
 
-const onSignIn = () => emit('onSignIn', {username: v$.password.$model, password: v$.password.$model});
+const onSignIn = () => emit('onSignIn', {
+// @ts-expect-error vuelidate
+  username: v$.password.$model,
+// @ts-expect-error vuelidate
+  password: v$.password.$model
+});
 </script>
 
 <style lang="scss" scoped>
