@@ -71,8 +71,9 @@ const rules = {
 const v$ = useVuelidate(rules, form);
 
 const onSubmit = async () => {
-  v$.value.$touch()
-  if (v$.value.$error) return
+  const isFormCorrect = await v$.value.$validate();
+  if (isFormCorrect) return;
+
   if (route.params.id) {
     await updateParty(route.params.id as string, form)
   } else {
