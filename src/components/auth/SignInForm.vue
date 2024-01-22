@@ -4,7 +4,9 @@
     <v-item-group class="flex flex-col items-end w-100 h-100 mb-4 text-gray-500">
       <v-text-field
           v-model="v$.username.$model"
+          :error="v$.username.$error"
           class="w-100"
+          hint="Логин не может быть пустым и меньше 8 символов"
           label="Логин"
           prepend-inner-icon="mdi-account-circle-outline"
           required
@@ -13,7 +15,9 @@
       />
       <v-text-field
           v-model="v$.password.$model"
+          :error="v$.password.$error"
           class="w-100"
+          hint="Пароль не может быть пустым и меньше 8 символов"
           label="Пароль"
           prepend-inner-icon="mdi-lock-outline"
           required
@@ -26,8 +30,9 @@
       </a>
     </v-item-group>
     <v-item-group class="flex justify-center gap-2 mb-10">
-      <v-btn density="comfortable" icon="mdi-google"/>
-      <v-btn density="comfortable" icon="mdi-instagram"/>
+      <!--      TODO возможность входа через соц. сети-->
+      <v-btn class="cursor-not-allowed" density="comfortable" icon="mdi-google"/>
+      <v-btn class="cursor-not-allowed" density="comfortable" icon="mdi-instagram"/>
     </v-item-group>
 
     <v-card-actions class="flex flex-col gap-2 mb-20">
@@ -65,20 +70,25 @@ const form = ref({
 
 const rules = {
   username: {
-    required: minLength(8) && required,
+    required,
+    minLength: minLength(8)
   },
   password: {
-    required: minLength(8) && required,
+    required,
+    minLength: minLength(8),
   },
 }
 const v$ = useVuelidate(rules, form);
 
-const onSignIn = () => emit('onSignIn', {
-// @ts-expect-error vuelidate
-  username: v$.password.$model,
-// @ts-expect-error vuelidate
-  password: v$.password.$model
-});
+const onSignIn = async () => {
+  const isFormCorrect = await v$.value.$validate();
+  if (!isFormCorrect) return;
+
+  emit('onSignIn', {
+    username: v$.value.username.$model,
+    password: v$.value.password.$model
+  });
+};
 </script>
 
 <style lang="scss" scoped>
