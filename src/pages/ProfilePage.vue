@@ -26,9 +26,6 @@
     </div>
     <div class="additional-info text">
       <div class="additional-info__socials">
-        <img class="additional-info__socials--svg" :src="instagram" alt=""/>
-        <img class="additional-info__socials--svg" :src="telegram" alt=""/>
-        <img class="additional-info__socials--svg" :src="vk" alt=""/>
       </div>
       <v-btn class="text" variant="outlined">
         Поделиться
@@ -47,9 +44,6 @@
 </template>
 
 <script setup>
-import vk from "@/assets/vk-logo.svg"
-import instagram from "@/assets/instagram-logo.svg"
-import telegram from "@/assets/telegram-logo.svg"
 
 import PhotoCard from "@/components/UI/PhotoCard.vue";
 </script>
@@ -64,7 +58,6 @@ import PhotoCard from "@/components/UI/PhotoCard.vue";
     width: 300px;
     height: 300px;
     border-radius: 36px;
-    background: url("@/assets/kirill-photo.png");
     &__avatar {
       display:block;
       height:100%;
@@ -88,7 +81,6 @@ import PhotoCard from "@/components/UI/PhotoCard.vue";
       justify-content: center;
       width: 374px;
       height: 116px;
-      background: no-repeat url("@/assets/shtrih.png");
     }
     &__guests-count {
       margin-top: 26px;

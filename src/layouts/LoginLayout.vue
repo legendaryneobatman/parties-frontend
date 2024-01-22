@@ -1,13 +1,9 @@
 <script setup lang="ts">
-
-import logo from "@/assets/logo.svg";
 </script>
 
 <template>
-  <v-layout full-height>
-    <v-app-bar>
-      <v-img class="w-auto h-100" :src="logo"/>
-    </v-app-bar>
+  <v-layout full-height class="relative">
+    <h1 class="fixed ml-10 mt-10 router-link-active router-link-exact-active text-white text-2xl font-bold">Тусовки</h1>
     <v-main>
       <v-container class="fill-height justify-center">
         <router-view/>
@@ -18,6 +14,8 @@ import logo from "@/assets/logo.svg";
 
 <style scoped lang="scss">
 .v-main {
-  background-color: #E8F8F9;
+  background-image: url("@/assets/login-background.png");
+  background-position: center;
+  background-size: cover;
 }
 </style>

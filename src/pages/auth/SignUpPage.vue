@@ -1,30 +1,27 @@
 <template>
-  <login-form @on-sign-in="onSignIn" @on-sign-up="onSignUp"></login-form>
+  <sign-up-form @on-sign-in="onSignIn"/>
 </template>
 
 <script setup lang="ts">
-
-import LoginForm from "@/components/auth/LoginForm.vue";
 import {ICreateUser} from "@/api/auth";
+import SignUpForm from "@/components/auth/SignUpForm.vue";
 import {useRouter} from "vue-router";
 import {commonPaths} from "@/router/commonPaths";
 import {useUserStore} from "@/store/user";
 
 const router = useRouter();
 const userStore = useUserStore();
-
 const onSignIn = async (payload: ICreateUser) => {
-  await userStore.onSignIn(payload)
-  await router.push({
-    path: commonPaths.MAIN,
-  })
+  await userStore.onSignUp(payload)
+  if (userStore.isLogin) {
+    await router.push({
+      path: commonPaths.MAIN
+    })
+  }
 }
-const onSignUp = () => {
-  router.push({
-    path: commonPaths.SIGN_UP,
-  })
-}
+
 </script>
 
 <style scoped>
+
 </style>
