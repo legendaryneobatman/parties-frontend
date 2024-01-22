@@ -1,17 +1,4 @@
-<script lang="ts" setup>
-import {useUserStore} from "@/store/user";
-import {getAllUsers} from "@/api/user";
-import {onBeforeMount} from "vue";
-
-const userStore = useUserStore();
-const fetchAllUsers = async () => {
-  userStore.users = await getAllUsers();
-}
-
-onBeforeMount(() => {
-  fetchAllUsers();
-})
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <v-app>

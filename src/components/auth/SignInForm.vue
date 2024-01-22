@@ -1,80 +1,80 @@
-<script setup lang="ts">
-import {reactive} from "vue";
-
-import {ICreateUser} from "@/api/auth";
-
-const emit = defineEmits(['onSignIn']);
-const onSignIn = () => emit('onSignIn', form);
-
-const form = reactive<ICreateUser>({
-  username: "",
-  email: "",
-  password: "",
-})
-</script>
-
 <template>
-
-  <v-card class="login-form rounded-lg">
-    <v-card-title>Создать пользователя</v-card-title>
-    <v-card-item class="w-100">
+  <v-card class="pt-16 pb-8 px-10 rounded-lg w-[420px]">
+    <v-card-title class="font-semibold text-center text-4xl pb-16">Вход</v-card-title>
+    <v-item-group class="flex flex-col items-end w-100 h-100 mb-4 text-gray-500">
       <v-text-field
           v-model="form.username"
           class="w-100"
           label="Логин"
-          type="text"
           required
+          type="text"
+          variant="underlined"
+          prepend-inner-icon="mdi-account-circle-outline"
       />
-    </v-card-item>
-    <v-card-item class="w-100">
       <v-text-field
           v-model="form.password"
+          class="w-100"
           label="Пароль"
+          required
           type="password"
-          required
-          class="w-100"
+          variant="underlined"
+          prepend-inner-icon="mdi-lock-outline"
       />
-    </v-card-item>
-    <v-card-item class="w-100">
-      <v-text-field
-          v-model="form.email"
-          label="E-mail"
-          type="email"
-          required
-          class="w-100"
-      />
-    </v-card-item>
+      <!--      TODO логика востановления пароля-->
+      <a class="text-end cursor-pointer hover:underline">
+        Забыли пароль?
+      </a>
+    </v-item-group>
+    <v-item-group class="flex justify-center gap-2 mb-10">
+      <v-btn density="comfortable" icon="mdi-google"/>
+      <v-btn density="comfortable" icon="mdi-instagram"/>
+    </v-item-group>
 
-    <v-card-actions class="login-form__actions">
+    <v-card-actions class="flex flex-col gap-2 mb-20">
       <v-btn
-          prepend-icon="mdi-check-circle"
-          variant="tonal"
+          class="w-full rounded-xl text-white bg-gradient-to-r from-indigo-500 to-fuchsia-600 font-bold"
           size="large"
-          color="amber"
-          class="mt-4 w-100"
+          variant="tonal"
           @click="onSignIn"
       >
-        <template #prepend>
-          <v-icon color="amber"></v-icon>
-        </template>
-        Зарегистрироваться
+        Войти
       </v-btn>
     </v-card-actions>
+
+    <router-link
+        :to="commonPaths.SIGN_UP"
+        class="w-full rounded-xl font-medium cursor-pointer hover:underline text-gray-500"
+    >
+      Зарегистрироваться
+    </router-link>
   </v-card>
 </template>
 
-<style scoped lang="scss">
-.login-form {
-  max-width: 640px;
-  width: 100%;
-  border: 2px solid rgba(0, 0, 0, 0.09);
-  padding: 20px;
+<script lang="ts" setup>
+import {ref} from "vue";
+import {minLength, required} from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import {commonPaths} from "@/router/commonPaths";
 
-  &__actions {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+const emit = defineEmits(['onSignIn', 'onSignUp']);
+
+const form = ref({
+  username: "",
+  password: "",
+})
+
+const rules = {
+  username: {
+    required: minLength(8) && required,
+  },
+  password: {
+    required: minLength(8) && required,
+  },
 }
+const v$ = useVuelidate(rules, form);
 
+const onSignIn = () => emit('onSignIn', {username: v$.password.$model, password: v$.password.$model});
+</script>
+
+<style lang="scss" scoped>
 </style>
