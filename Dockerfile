@@ -1,7 +1,7 @@
 FROM oven/bun:canary-slim as builder
 WORKDIR /app
 COPY package.json /app/
-COPY package-lock.json /app/
+COPY bun.lockb /app/
 RUN bun install
 ADD . /app
 RUN bun run build
