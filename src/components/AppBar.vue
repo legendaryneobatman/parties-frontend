@@ -1,7 +1,7 @@
 <template>
   <header class="flex items-center">
     <router-link class="text-indigo-600 text-2xl font-bold" to="/">Тусовки</router-link>
-    <div class="flex items-end ml-16 mr-auto">
+    <div class="flex items-end gap-4 ml-16 mr-auto">
       <router-link
           :to="commonPaths.PARTIES_PAGE"
           class="text-gray-500 font-semibold text-base hover:underline underline-offset-4 hover:text-indigo-600 transition-all duration-150 ease-in-out"
@@ -9,8 +9,15 @@
       >
         Список тусовок
       </router-link>
+      <router-link
+        :to="commonPaths.PROFILE"
+        class="text-gray-500 font-semibold text-base hover:underline underline-offset-4 hover:text-indigo-600 transition-all duration-150 ease-in-out"
+        :class="{['underline']: commonPaths.PROFILE === $route.path}"
+      >
+        Профиль
+      </router-link>
     </div>
-    <div class="flex gap-2">
+    <div class="flex items-center gap-2">
       <v-btn
         variant="outlined"
         class="text-gray-500 hover:text-indigo-600 transition-all duration-150 ease-in-out font-bold"

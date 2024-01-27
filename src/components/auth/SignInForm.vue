@@ -25,7 +25,7 @@
           variant="underlined"
       />
       <!--      TODO логика востановления пароля-->
-      <a class="text-end cursor-pointer hover:underline">
+      <a class="text-end cursor-not-allowed hover:underline">
         Забыли пароль?
       </a>
     </v-item-group>

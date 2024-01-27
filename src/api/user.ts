@@ -4,9 +4,21 @@ export interface IUser {
   id: number;
   username: string;
   email: string;
+
+  firstName: string;
+  lastName: string;
+  avatar: string
+  birthdate: string;
+  address: string;
+  description: string;
 }
 
-export async function getAllUsers(): Promise<IUser[]> {
-  const response = await axiosInstance.get(`/user`);
+export async function findMe(): Promise<IUser> {
+  const response = await axiosInstance.get(`/user/me`);
+  return response.data
+}
+
+export async function updateProfile(payload: Omit<Partial<IUser>, 'id'>): Promise<IUser> {
+  const response = await axiosInstance.put(`/user`, payload);
   return response.data
 }
