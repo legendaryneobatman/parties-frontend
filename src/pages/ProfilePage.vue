@@ -65,7 +65,7 @@ const user = ref<Partial<IUser>>({
   description: '',
 });
 
-const file = ref<File[] | null>(null);
+const file = ref<File[]>([]);
 
 const statistics = {
   parties: 0,
