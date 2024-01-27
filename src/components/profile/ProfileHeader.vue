@@ -18,7 +18,7 @@ const onEdit = () => emits('onEdit')
 <template>
   <div class="flex flex-col items-center justify-center mb-8">
     <h1 class="text-4xl">{{ firstName }} {{ lastName }}</h1>
-    <h2 class="text-2xl text-gray-500">{{ username }}</h2>
+    <h2 class="text-2xl text-gray-500">@{{ username }}</h2>
     <v-btn
       class="bg-gradient-to-r from-indigo-500 to-fuchsia-600 mt-8 rounded-xl"
       color="indigo-darken-2"

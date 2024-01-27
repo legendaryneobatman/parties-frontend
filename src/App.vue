@@ -1,10 +1,5 @@
 <script lang="ts" setup>
-import {onBeforeMount} from "vue";
-import {findMe} from "@/api/user";
 
-onBeforeMount(async () => {
-  await findMe()
-})
 </script>
 
 <template>
