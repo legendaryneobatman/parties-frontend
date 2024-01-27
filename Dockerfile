@@ -1,10 +1,10 @@
-FROM node:16-alpine as builder
+FROM oven/bun:canary-slim as builder
 WORKDIR /app
 COPY package.json /app/
 COPY package-lock.json /app/
-RUN npm install
+RUN bun install
 ADD . /app
-RUN npm run build
+RUN bun run build
 
 FROM nginx:1.19
 
