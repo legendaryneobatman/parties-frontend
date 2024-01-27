@@ -6,7 +6,7 @@ export interface IUser {
   email: string;
 }
 
-export async function getAllUsers(): Promise<IUser[]> {
-  const response = await axiosInstance.get(`/user`);
+export async function findMe(): Promise<IUser> {
+  const response = await axiosInstance.get(`/user/me`);
   return response.data
 }

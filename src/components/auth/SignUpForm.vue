@@ -1,69 +1,92 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {reactive} from "vue";
 
 import {ICreateUser} from "@/api/auth";
+import useVuelidate from "@vuelidate/core";
+import {email, minLength, required} from "@vuelidate/validators";
 
 const emit = defineEmits(['onSignIn']);
-const onSignIn = () => emit('onSignIn', form);
+const onSignUp = () => emit('onSignIn', form);
 
 const form = reactive<ICreateUser>({
   username: "",
   email: "",
   password: "",
 })
+
+const v$ = useVuelidate({
+  username: {
+    required: required && minLength(8),
+  },
+  email: {
+    required: required && email,
+  },
+  password: {
+    required: required && minLength(8),
+  }
+}, form)
 </script>
 
 <template>
-
-  <v-card class="login-form rounded-lg">
-    <v-card-title>Создать пользователя</v-card-title>
-    <v-card-item class="w-100">
+  <v-card class="pt-16 pb-8 px-10 rounded-lg w-[420px]">
+    <v-card-title class="font-semibold text-center text-4xl pb-16">Регистрация</v-card-title>
+    <v-item-group class="flex flex-col items-end w-100 h-100 mb-4 text-gray-500">
       <v-text-field
-          v-model="form.username"
+          v-model="v$.username.$model"
+          :error="v$.username.$error"
           class="w-100"
+          hint="Логин не может быть пустым и меньше 8 символов"
           label="Логин"
+          prepend-inner-icon="mdi-account-circle-outline"
           type="text"
-          required
+          variant="underlined"
       />
-    </v-card-item>
-    <v-card-item class="w-100">
       <v-text-field
-          v-model="form.password"
-          label="Пароль"
-          type="password"
-          required
+          v-model="v$.email.$model"
+          :error="v$.email.$error"
           class="w-100"
-      />
-    </v-card-item>
-    <v-card-item class="w-100">
-      <v-text-field
-          v-model="form.email"
-          label="E-mail"
+          hint="Email не может быть пустым"
+          label="Email"
+          prepend-inner-icon="mdi-email-outline"
           type="email"
-          required
-          class="w-100"
+          variant="underlined"
       />
-    </v-card-item>
-
-    <v-card-actions class="login-form__actions">
-      <v-btn
-          prepend-icon="mdi-check-circle"
-          variant="tonal"
-          size="large"
-          color="amber"
-          class="mt-4 w-100"
-          @click="onSignIn"
+      <v-text-field
+          v-model="v$.password.$model"
+          :error="v$.password.$error"
+          class="w-100"
+          hint="Пароль не может быть пустым и меньше 8 символов"
+          label="Пароль"
+          prepend-inner-icon="mdi-lock-outline"
+          type="password"
+          variant="underlined"
+      />
+    </v-item-group>
+    <!--      TODO возможность регистрации через соц. сети-->
+    <v-item-group class="flex justify-center gap-2 mb-10">
+      <span
+          class="w-full rounded-xl font-medium text-gray-500"
       >
-        <template #prepend>
-          <v-icon color="amber"></v-icon>
-        </template>
+        Или зарегестрируйтесь через соц. сети
+      </span>
+      <v-btn class="cursor-not-allowed" density="comfortable" icon="mdi-google"/>
+      <v-btn class="cursor-not-allowed" density="comfortable" icon="mdi-instagram"/>
+    </v-item-group>
+
+    <v-card-actions class="flex flex-col gap-2 mt-20">
+      <v-btn
+          class="w-full rounded-xl text-white bg-gradient-to-r from-indigo-500 to-fuchsia-600 font-bold"
+          size="large"
+          variant="tonal"
+          @click="onSignUp"
+      >
         Зарегистрироваться
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .login-form {
   max-width: 640px;
   width: 100%;
