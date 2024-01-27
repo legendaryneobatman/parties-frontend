@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 interface IProfileInfoProps {
-  birthdate: string;
-  address: string;
-  email: string;
-  description: string;
+  birthdate?: string;
+  address?: string;
+  email?: string;
+  description?: string;
 }
 
 const props = defineProps<IProfileInfoProps>();
