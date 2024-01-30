@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {computed, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import dayjs from "dayjs";
 import 'dayjs/locale/ru'
 export interface IDatePickerProps {
@@ -18,6 +18,7 @@ const emits = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false);
 const date = ref();
+const datePicker = ref();
 const updateDate = (date: string) => {
   emits('update:modelValue', date)
 }
@@ -31,6 +32,13 @@ const onFocus = () => {
 const onBlur = () => {
   isOpen.value = false
 }
+
+const position = computed(() => {
+  console.log(datePicker.value.$el)
+
+  return 'asd'
+})
+
 </script>
 
 <template>
@@ -38,6 +46,7 @@ const onBlur = () => {
     v-click-outside="onBlur"
       class="relative h-full overflow-visible"
   >
+    asdasd
     <v-text-field
         :label="label"
         :model-value="displayDate"
@@ -47,6 +56,7 @@ const onBlur = () => {
         @focus="onFocus"
     />
     <v-date-picker
+        ref="datePicker"
         v-show="isOpen"
         v-model="date"
         class="absolute top-full left-0 z-10 border-2"

@@ -22,6 +22,7 @@ const toParty = (id: number) => {
   <v-sheet>
     <h1 class="text-4xl text-indigo-600 font-bold mb-4">Список тусей</h1>
     <parties-grid :parties="parties" @on-card-click="toParty"/>
+    <span v-show="parties.length === 0" class="text-2xl text-gray-600">Список пуст</span>
   </v-sheet>
 </template>
 
