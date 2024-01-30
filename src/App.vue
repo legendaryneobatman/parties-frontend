@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+import {onBeforeMount} from "vue";
+import {useUserStore} from "@/store/user";
+
+const userStore = useUserStore();
+
+onBeforeMount(async () => {
+  await userStore.fetchUser()
+})
 
 </script>
 

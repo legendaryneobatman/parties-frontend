@@ -9,13 +9,6 @@
       >
         Список тусовок
       </router-link>
-      <router-link
-        :to="commonPaths.PROFILE"
-        class="text-gray-500 font-semibold text-base hover:underline underline-offset-4 hover:text-indigo-600 transition-all duration-150 ease-in-out"
-        :class="{['underline']: commonPaths.PROFILE === $route.path}"
-      >
-        Профиль
-      </router-link>
     </div>
     <div class="flex items-center gap-2">
       <v-btn
@@ -26,6 +19,10 @@
         Создать тусовку
       </v-btn>
       <v-btn class="text-gray-500 font-semibold text-base" variant="text" @click="onSignOut">Выйти</v-btn>
+      <router-link :to="commonPaths.PROFILE" class="flex items-center font-semibold text-black gap-2">
+        <span class="text-md">{{userStore.user?.firstName}} {{ userStore.user?.lastName}}</span>
+        <v-avatar :image="userStore.getUserAvatar" size="48" />
+      </router-link>
     </div>
   </header>
 </template>
